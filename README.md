@@ -17,7 +17,7 @@ Built with **LangChain** and **LangGraph**, it supports multi-provider failover,
 ## 🛠️ Tech Stack
 
 - **Orchestration:** LangChain / LangGraph (JS/TS)
-- **Inference Engine:** Groq (Flagship GPT-OSS 120B) / Google Gemini
+- **Inference Engine:** Groq (Flagship GPT-OSS 120B)
 - **Runtime:** Node.js
 - **Pattern:** ReAct (Reasoning + Acting)
 - **Security Scope:** OWASP Top 10 (Injection, Cryptographic Failures, etc.)
@@ -26,7 +26,6 @@ Built with **LangChain** and **LangGraph**, it supports multi-provider failover,
 
 - **Autonomous Directory Traversal:** Intelligently maps codebase structure to identify high-risk files (e.g., `db.js`, `auth.js`, `.env`).
 - **Resilient Infrastructure:** Implements exponential backoff, request throttling, and recursion limits to handle high-latency or rate-limited API environments.
-- **Provider Agnostic:** Easily switch between LLM providers (Google, Groq, OpenAI) while maintaining consistent tool-calling logic.
 - **Automated Reporting:** Generates a structured `security-report.md` detailing discovered vulnerabilities and remediation steps.
 
 ## 📂 Project Structure
