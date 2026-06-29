@@ -1,0 +1,35 @@
+name: Autonomous Security Audit
+
+on:
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  sast-audit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Security Auditor Agent
+        # Pass the Groq API Key securely from GitHub Secrets
+        env:
+          GROQ_API_KEY: process.env.GROQ_API_KEY
+        run: node index.js
+
+      - name: Archive Security Report
+        # This saves the generated markdown report as a downloadable artifact in the PR
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-report
+          path: security-report.md
