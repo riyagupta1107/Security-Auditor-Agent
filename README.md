@@ -12,7 +12,6 @@ Unlike standard scripts, this is a **fully autonomous agent**. Given a target di
 3. **Observes** the output and reasons about the security implications.
 4. **Iterates** until a final audit report is produced.
 
-Built with **LangChain** and **LangGraph**, it supports multi-provider failover, currently optimized for **Groq (GPT-OSS 120B)** and **Google Gemini 1.5/2.0**.
 
 ## 🛠️ Tech Stack
 
