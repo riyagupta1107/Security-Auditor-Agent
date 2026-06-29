@@ -4,7 +4,7 @@ An autonomous AI agent designed to perform Static Application Security Testing (
 
 ---
 
-## 🚀 Overview
+##  Overview
 
 Unlike standard scripts, this is a **fully autonomous agent**. Given a target directory, the agent:
 1. **Plans** its approach based on the file structure.
@@ -13,7 +13,7 @@ Unlike standard scripts, this is a **fully autonomous agent**. Given a target di
 4. **Iterates** until a final audit report is produced.
 
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Orchestration:** LangChain / LangGraph (JS/TS)
 - **Inference Engine:** Groq (Flagship GPT-OSS 120B)
@@ -21,13 +21,13 @@ Unlike standard scripts, this is a **fully autonomous agent**. Given a target di
 - **Pattern:** ReAct (Reasoning + Acting)
 - **Security Scope:** OWASP Top 10 (Injection, Cryptographic Failures, etc.)
 
-## ✨ Key Features
+##  Key Features
 
 - **Autonomous Directory Traversal:** Intelligently maps codebase structure to identify high-risk files (e.g., `db.js`, `auth.js`, `.env`).
 - **Resilient Infrastructure:** Implements exponential backoff, request throttling, and recursion limits to handle high-latency or rate-limited API environments.
 - **Automated Reporting:** Generates a structured `security-report.md` detailing discovered vulnerabilities and remediation steps.
 
-## 📂 Project Structure
+##  Project Structure
 
 ```text
 ├── agent.js           # Agent configuration and LLM initialization
