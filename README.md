@@ -4,7 +4,7 @@
 
 The AI Security Audit Agent is an autonomous code security analysis tool designed to identify common security vulnerabilities in software projects. It leverages Large Language Models (LLMs) with the ReAct (Reasoning + Acting) pattern to inspect source code, prioritize high-risk files, and generate actionable security reports.
 
-The project is designed with a shift-left security approach, enabling developers to detect vulnerabilities early during development and Continuous Integration/Continuous Deployment (CI/CD) workflows.
+The project follows a shift-left security approach, enabling developers to detect vulnerabilities early during development and CI/CD workflows.
 
 ---
 
@@ -43,7 +43,7 @@ graph TD
 
 ### Autonomous Directory Traversal
 
-The agent recursively scans the project structure to locate files that commonly contain security-sensitive logic, including:
+The agent recursively scans the project structure to identify security-sensitive files, including:
 
 * `db.js`
 * `auth.js`
@@ -52,57 +52,41 @@ The agent recursively scans the project structure to locate files that commonly 
 * Authentication modules
 * Database connection files
 
----
+### OWASP Top 10 Security Analysis
 
-### Security Analysis
-
-The agent analyzes the identified files for vulnerabilities aligned with the OWASP Top 10, including:
+The agent evaluates source code against common application security risks, including:
 
 * Injection vulnerabilities
 * Broken authentication
 * Cryptographic failures
+* Broken access control
 * Security misconfiguration
 * Vulnerable dependencies
-* Broken access control
 * Insecure secrets management
-* Other common application security risks
-
----
 
 ### Controlled Execution
 
-To improve reliability, the workflow includes configurable recursion limits that act as safeguards against infinite loops or uncontrolled traversal.
-
----
+Configurable recursion limits act as circuit breakers, preventing infinite loops and ensuring stable execution.
 
 ### Automated Reporting
 
 After analysis, the agent generates a structured Markdown report containing:
 
-* Vulnerabilities detected
+* Vulnerabilities discovered
 * Severity level
-* Impact assessment
 * Affected files
+* Security impact
 * Recommended remediation steps
-
----
 
 ### CI/CD Integration
 
-The project includes GitHub Actions support to automatically execute security scans during Pull Requests.
-
-This enables:
-
-* Automated code review
-* Early vulnerability detection
-* Security report generation
-* Artifact upload for audit tracking
+The project integrates with GitHub Actions to automatically perform security scans on Pull Requests, enabling continuous security validation throughout the development lifecycle.
 
 ---
 
 ## Installation
 
-Clone the repository and install dependencies:
+Clone the repository and install the dependencies:
 
 ```bash
 npm install
@@ -120,38 +104,36 @@ GROQ_API_KEY=your_api_key_here
 
 ---
 
-## Running Locally
+## Running the Auditor
 
-Start the security audit:
+Run the application locally:
 
 ```bash
 node index.js
 ```
 
-After execution, a Markdown report named:
+After execution, the generated report will be available as:
 
 ```text
 security-report.md
 ```
 
-will be generated in the project directory.
-
 ---
 
 ## GitHub Actions
 
-The repository includes the workflow:
+The repository includes the following workflow:
 
 ```text
 .github/workflows/security-audit.yml
 ```
 
-When code is pushed or a Pull Request is opened, GitHub Actions automatically:
+On every Pull Request, GitHub Actions automatically:
 
-1. Installs dependencies
-2. Executes the security audit
-3. Generates `security-report.md`
-4. Uploads the report as a workflow artifact
+1. Installs project dependencies.
+2. Executes the security audit.
+3. Generates `security-report.md`.
+4. Uploads the report as a workflow artifact.
 
 ---
 
@@ -160,16 +142,17 @@ When code is pushed or a Pull Request is opened, GitHub Actions automatically:
 ```text
 .
 ├── agents/
-├── tools/
 ├── prompts/
 ├── reports/
-├── index.js
-├── package.json
-├── Dockerfile
+├── tools/
 ├── .github/
 │   └── workflows/
 │       └── security-audit.yml
-└── README.md
+├── Dockerfile
+├── index.js
+├── package.json
+├── README.md
+└── .env
 ```
 
 ---
@@ -178,29 +161,25 @@ When code is pushed or a Pull Request is opened, GitHub Actions automatically:
 
 ### Enterprise-Scale Code Analysis
 
-The current implementation depends on the LLM context window. Future enhancements will include:
+The current implementation depends on the LLM context window. Future versions will improve scalability through:
 
 * Abstract Syntax Tree (AST) parsing
 * Retrieval-Augmented Generation (RAG)
-* Incremental code indexing
+* Incremental indexing
 * Risk-based file prioritization
-
-These improvements will allow efficient analysis of larger codebases.
-
----
 
 ### Enhanced File System Security
 
-Future versions will implement strict path sanitization to ensure the agent cannot access files outside the specified project directory, reducing the risk of unintended file traversal.
+Future releases will implement strict path sanitization to prevent the agent from accessing files outside the designated project directory.
 
 ---
 
 ## Limitations
 
-* Analysis quality depends on the LLM context window.
-* Large repositories may require preprocessing before inference.
-* Dynamic runtime behavior is not fully analyzed.
-* Results should complement, not replace, traditional security testing tools.
+* Analysis quality depends on the LLM's context window.
+* Very large repositories may require preprocessing before analysis.
+* Runtime behavior is not fully analyzed.
+* The agent complements, but does not replace, traditional static and dynamic security testing tools.
 
 ---
 
@@ -211,11 +190,11 @@ Contributions are welcome.
 To contribute:
 
 1. Fork the repository.
-2. Create a feature branch.
+2. Create a new feature branch.
 3. Commit your changes.
-4. Submit a Pull Request.
+4. Open a Pull Request.
 
-Please ensure all code passes the security audit before submission.
+Please ensure your changes pass the security audit before submitting a Pull Request.
 
 ---
 
